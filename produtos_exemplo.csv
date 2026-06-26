@@ -1,0 +1,6 @@
+id,nome,categoria,preco,quantidade,status,estado,descricao,medidas,retirada,foto1,foto2,whatsapp
+1,Sofá cinza,Sala,900,1,Disponível,Muito bom,"Sofá confortável, usado com cuidado. Motivo da venda: mudança para a China.","2,10 m x 0,90 m",Retirada em Piracicaba,https://images.unsplash.com/photo-1555041469-a586c61ea9bc,https://images.unsplash.com/photo-1540574163026-643ea20ade25,5519999999999
+2,Mesa de jantar com 4 cadeiras,Sala,650,1,Reservado,Bom,"Mesa de jantar com quatro cadeiras. Alguns sinais de uso.","1,20 m x 0,80 m",Retirada em Piracicaba,https://images.unsplash.com/photo-1549497538-303791108f95,,5519999999999
+3,Air fryer,Cozinha,220,1,Disponível,Bom,"Funcionando normalmente.",,Retirada em Piracicaba,https://images.unsplash.com/photo-1626074353765-517a681e40be,,5519999999999
+4,Estante pequena,Escritório,180,1,Vendido,Bom,"Estante simples para livros e objetos.","1,60 m x 0,60 m",Retirada em Piracicaba,https://images.unsplash.com/photo-1594620302200-9a762244a156,,5519999999999
+5,Jogo de panelas,Cozinha,120,1,Disponível,Usado,"Conjunto com panelas variadas.",,Retirada em Piracicaba,https://images.unsplash.com/photo-1584990347449-a26ed34f95f2,,5519999999999

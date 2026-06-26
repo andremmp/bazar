@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bazar da Mudança</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Mudança para a China</p>
+      <h1>Bazar da casa</h1>
+      <p class="subtitle">Veja os itens disponíveis, filtre por categoria e chame no WhatsApp para reservar.</p>
+    </div>
+    <div class="hero-card">
+      <strong id="totalDisponiveis">—</strong>
+      <span>itens disponíveis</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="filters" aria-label="Filtros do catálogo">
+      <label>
+        Buscar
+        <input id="searchInput" type="search" placeholder="Ex.: sofá, panela, mesa..." />
+      </label>
+
+      <label>
+        Categoria
+        <select id="categoryFilter">
+          <option value="Todas">Todas</option>
+        </select>
+      </label>
+
+      <label>
+        Status
+        <select id="statusFilter">
+          <option value="Todos">Todos</option>
+          <option value="Disponível">Disponível</option>
+          <option value="Reservado">Reservado</option>
+          <option value="Vendido">Vendido</option>
+        </select>
+      </label>
+
+      <label>
+        Ordenar
+        <select id="sortFilter">
+          <option value="nome">Nome</option>
+          <option value="menor-preco">Menor preço</option>
+          <option value="maior-preco">Maior preço</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="catalog" class="grid" aria-live="polite"></section>
+    <p id="emptyState" class="empty" hidden>Nenhum item encontrado com esses filtros.</p>
+  </main>
+
+  <dialog id="productModal" class="modal">
+    <button id="closeModal" class="close" type="button" aria-label="Fechar">×</button>
+    <div id="modalContent"></div>
+  </dialog>
+
+  <footer class="footer">
+    <p>Atualizado automaticamente pela planilha do Google Sheets.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
