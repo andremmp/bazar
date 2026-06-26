@@ -3,15 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bazar da Mudança</title>
+  <title>Família de mudança vende tudo!</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="hero">
     <div>
-      <p class="eyebrow">Mudança para a China</p>
-      <h1>Bazar da casa</h1>
-      <p class="subtitle">Veja os itens disponíveis, filtre por categoria e chame no WhatsApp para reservar.</p>
+      <h1>Catálogo</h1>
+      <p class="subtitle">
+        Estamos nos mudando para a China em setembro de 2026 para iniciar nossos programas de pós-graduação,
+        por esse motivo, estamos vendendo a maior parte dos nossos pertences. Veja os itens disponíveis,
+        filtre por categoria e chame no WhatsApp para reservar. Serão agendadas visitas
+      </p>
+
+      <div class="info-box" aria-label="Informações importantes sobre as vendas">
+        <p><strong>📍 Retirada:</strong> Vila Independência, Piracicaba/SP.</p>
+        <p><strong>🔒 Reserva:</strong> para reservar um item, solicitamos um sinal de 10% do valor, descontado do pagamento final.</p>
+        <p><strong>⚠️ Desistência:</strong> o valor da reserva não é reembolsável caso a pessoa desista da compra.</p>
+        <p><strong>👀 Visitas:</strong> visitas podem ser combinadas pelo WhatsApp para avaliar os produtos presencialmente. Pretendemos organizar datas com horários para várias pessoas virem conhecer os itens.</p>
+        <p><strong>📦 Disponibilidade:</strong> alguns itens podem ser retirados imediatamente; outros serão entregues apenas entre setembro e outubro de 2026.</p>
+        <p><strong>💬 WhatsApp:</strong> <a href="https://wa.me/5511997250908" target="_blank" rel="noopener">clique aqui para chamar</a> ou substitua pelo seu número.</p>
+      </div>
     </div>
     <div class="hero-card">
       <strong id="totalDisponiveis">—</strong>
@@ -44,6 +56,15 @@
       </label>
 
       <label>
+        Retirada
+        <select id="availabilityFilter">
+          <option value="Todas">Todas</option>
+          <option value="Imediata">Imediata</option>
+          <option value="Setembro/2026">Setembro/2026</option>
+        </select>
+      </label>
+
+      <label>
         Ordenar
         <select id="sortFilter">
           <option value="nome">Nome</option>
@@ -63,7 +84,7 @@
   </dialog>
 
   <footer class="footer">
-    <p>Atualizado automaticamente pela planilha do Google Sheets.</p>
+    <p>Catálogo atualizado conforme as vendas acontecem. Itens reservados dependem do pagamento do sinal de 10%.</p>
   </footer>
 
   <script src="app.js"></script>
