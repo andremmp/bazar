@@ -4,79 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Família de mudança vende tudo!</title>
+  <meta name="description" content="Catálogo de itens de uma família em mudança para a China. Reserve pelo WhatsApp e combine a retirada em Piracicaba/SP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <div>
-      <h1>Família de mudança vende tudo!</h1>
-      <p class="subtitle">
-        Estamos nos mudando para a China em setembro de 2026 para iniciar nossos programas de pós-graduação,
-        por esse motivo, estamos vendendo a maior parte dos nossos pertences. Veja os itens disponíveis,
-        filtre por categoria e chame no WhatsApp para reservar!
-      </p>
+  <header class="site-header" aria-label="Topo do site">
+    <a class="brand" href="#top" aria-label="Ir para o início">
+      <span class="brand-icon" aria-hidden="true">中</span>
+      <span>
+        <strong>Mudança para a China</strong>
+        <small>catálogo da família</small>
+      </span>
+    </a>
 
-      <div class="info-box" aria-label="Informações importantes sobre as vendas">
-        <p><strong>📍 Retirada:</strong> Vila Independência, Piracicaba/SP.</p>
-        <p><strong>🔒 Reserva:</strong> para reservar um item, solicitamos um sinal de 10% do valor, descontado do pagamento final.</p>
-        <p><strong>⚠️ Desistência:</strong> o valor da reserva não é reembolsável em casos de desistência da compra!</p>
-        <p><strong>👀 Visitas:</strong> visitas podem ser combinadas pelo WhatsApp para avaliar os produtos presencialmente. Pretendemos organizar datas com horários para várias pessoas virem conhecer os itens.</p>
-        <p><strong>💳Pagamento:</strong> aceitamos Pix, dinheiro ou transferência bancária. Chave Pix (telefone): <strong>(11) 99725-0908</strong> — André Montanari Marques Pereira (Nubank).<p>
-        <p><strong>📦 Disponibilidade:</strong> alguns itens podem ser retirados imediatamente; outros serão entregues apenas entre setembro e outubro de 2026.</p>
-        <p><strong>💬 WhatsApp:</strong> <a href="https://wa.me/5511997250908" target="_blank" rel="noopener">clique aqui para chamar</a></p>
-      </div>
-    </div>
-    <div class="hero-card">
-      <strong id="totalDisponiveis">—</strong>
-      <span>itens disponíveis</span>
-    </div>
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#informacoes">Informações</a>
+      <a class="nav-cta" href="https://wa.me/5511997250908" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="filters" aria-label="Filtros do catálogo">
-      <label>
-        Buscar
-        <input id="searchInput" type="search" placeholder="Ex.: sofá, panela, mesa..." />
-      </label>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Venda de mudança · Piracicaba/SP</p>
+        <h1>Família de mudança vende tudo!</h1>
+        <p class="subtitle">
+          Estamos nos mudando para a China em setembro de 2026 para iniciar nossos programas de pós-graduação.
+          Por isso, estamos vendendo a maior parte dos nossos pertences. Veja os itens disponíveis,
+          filtre por categoria e chame no WhatsApp para reservar.
+        </p>
 
-      <label>
-        Categoria
-        <select id="categoryFilter">
-          <option value="Todas">Todas</option>
-        </select>
-      </label>
+        <div class="hero-actions" aria-label="Ações principais">
+          <a class="button primary" href="#catalogo">Ver itens disponíveis</a>
+          <a class="button secondary" href="https://wa.me/5511997250908" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        </div>
 
-      <label>
-        Status
-        <select id="statusFilter">
-          <option value="Todos">Todos</option>
-          <option value="Disponível">Disponível</option>
-          <option value="Reservado">Reservado</option>
-          <option value="Vendido">Vendido</option>
-        </select>
-      </label>
+        <div class="hero-points" aria-label="Resumo das condições">
+          <span>📍 Retirada em Piracicaba</span>
+          <span>🔒 Reserva com 10%</span>
+          <span>📦 Alguns itens para set/out 2026</span>
+        </div>
+      </div>
 
-      <label>
-        Retirada
-        <select id="availabilityFilter">
-          <option value="Todas">Todas</option>
-          <option value="Imediata">Imediata</option>
-          <option value="Setembro/2026">Setembro/2026</option>
-        </select>
-      </label>
-
-      <label>
-        Ordenar
-        <select id="sortFilter">
-          <option value="nome">Nome</option>
-          <option value="menor-preco">Menor preço</option>
-          <option value="maior-preco">Maior preço</option>
-        </select>
-      </label>
+      <aside class="hero-panel" aria-label="Resumo do catálogo">
+        <img src="familia-china.png" alt="Ilustração de uma família com duas gatas e uma mala olhando para uma paisagem inspirada na China" />
+        <div class="hero-stat">
+          <strong id="totalDisponiveis">—</strong>
+          <span>itens disponíveis</span>
+        </div>
+      </aside>
     </section>
 
-    <section id="catalog" class="grid" aria-live="polite"></section>
-    <p id="emptyState" class="empty" hidden>Nenhum item encontrado com esses filtros.</p>
+    <section id="informacoes" class="info-section" aria-label="Informações importantes sobre as vendas">
+      <div class="section-heading">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Informações importantes</h2>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="card-icon" aria-hidden="true">📍</span>
+          <h3>Retirada</h3>
+          <p>Vila Independência, Piracicaba/SP. Visitas podem ser combinadas pelo WhatsApp para avaliar os produtos presencialmente.</p>
+        </article>
+
+        <article class="info-card">
+          <span class="card-icon" aria-hidden="true">🔒</span>
+          <h3>Reserva</h3>
+          <p>Para reservar um item, solicitamos um sinal de 10% do valor, descontado do pagamento final.</p>
+        </article>
+
+        <article class="info-card">
+          <span class="card-icon" aria-hidden="true">⚠️</span>
+          <h3>Desistência</h3>
+          <p>O valor da reserva não é reembolsável em caso de desistência da compra.</p>
+        </article>
+
+        <article class="info-card">
+          <span class="card-icon" aria-hidden="true">💳</span>
+          <h3>Pagamento</h3>
+          <p>Aceitamos Pix, dinheiro ou transferência bancária. Chave Pix: <strong>(11) 99725-0908</strong> — André Montanari Marques Pereira.</p>
+        </article>
+
+        <article class="info-card wide">
+          <span class="card-icon" aria-hidden="true">📦</span>
+          <h3>Disponibilidade de retirada</h3>
+          <p>Alguns itens podem ser retirados imediatamente; outros serão entregues apenas entre setembro e outubro de 2026.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalog-section">
+      <div class="section-heading catalog-heading">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2>Itens à venda</h2>
+        </div>
+        <p>Use os filtros para encontrar rapidamente móveis, eletrodomésticos, itens de cozinha e outros pertences.</p>
+      </div>
+
+      <section class="filters" aria-label="Filtros do catálogo">
+        <label>
+          Buscar
+          <input id="searchInput" type="search" placeholder="Ex.: sofá, panela, mesa..." />
+        </label>
+
+        <label>
+          Categoria
+          <select id="categoryFilter">
+            <option value="Todas">Todas</option>
+          </select>
+        </label>
+
+        <label>
+          Status
+          <select id="statusFilter">
+            <option value="Todos">Todos</option>
+            <option value="Disponível">Disponível</option>
+            <option value="Reservado">Reservado</option>
+            <option value="Vendido">Vendido</option>
+          </select>
+        </label>
+
+        <label>
+          Retirada
+          <select id="availabilityFilter">
+            <option value="Todas">Todas</option>
+            <option value="Imediata">Imediata</option>
+            <option value="Setembro/2026">Setembro/2026</option>
+            <option value="Outubro/2026">Outubro/2026</option>
+          </select>
+        </label>
+
+        <label>
+          Ordenar
+          <select id="sortFilter">
+            <option value="nome">Nome</option>
+            <option value="menor-preco">Menor preço</option>
+            <option value="maior-preco">Maior preço</option>
+          </select>
+        </label>
+      </section>
+
+      <section id="catalog" class="grid" aria-live="polite"></section>
+      <p id="emptyState" class="empty" hidden>Nenhum item encontrado com esses filtros.</p>
+    </section>
   </main>
 
   <dialog id="productModal" class="modal">
@@ -86,6 +162,7 @@
 
   <footer class="footer">
     <p>Catálogo atualizado conforme as vendas acontecem. Itens reservados dependem do pagamento do sinal de 10%.</p>
+    <a href="https://wa.me/5511997250908" target="_blank" rel="noopener">Falar com André pelo WhatsApp</a>
   </footer>
 
   <script src="app.js"></script>
