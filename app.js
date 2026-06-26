@@ -131,13 +131,15 @@ function getFilteredProducts() {
   const status = statusFilter.value;
   const availability = availabilityFilter.value;
   const sort = sortFilter.value;
-
+  
   let filtered = products.filter(product => {
-    const text = normalize(`${product.nome} ${product.categoria} ${product.descricao} ${product.estado} ${product.retirada}`);
+    const text = normalize(`${product.nome} ${product.categoria} ${product.descricao} ${product.estado}`);
     const matchesQuery = !query || text.includes(query);
     const matchesCategory = category === "Todas" || product.categoria === category;
     const matchesStatus = status === "Todos" || product.status === status;
-    return matchesQuery && matchesCategory && matchesStatus && matchesAvailability(product, availability);
+    const matchesAvailability = availability === "Todas" || product.retirada === availability;
+    const isVisible = product.status !== "Vendido";
+    return isVisible && matchesQuery && matchesCategory && matchesStatus && matchesAvailability;
   });
 
   filtered.sort((a, b) => {
