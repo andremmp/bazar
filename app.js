@@ -1,7 +1,10 @@
-// 1) Publique sua planilha em CSV.
-// 2) Cole o link CSV abaixo.
-// Enquanto você não colar o link, o site usa produtos_exemplo.csv.
-const SHEET_CSV_URL = "produtos_exemplo.csv";
+// Dados dos produtos publicados diretamente pelo Google Planilhas.
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQtT5ShOCOTiXQUUk78IrNEEM4UZxrRJ7u11iJVnoPRjiYlFsv3SXF67CIE7UtkoaX42v6JmnPzJNSn/pub?gid=0&single=true&output=csv";
+
+// Depois de publicar o Google Apps Script, cole aqui a URL terminada em /exec.
+// Enquanto estiver vazio, o site tentará usar imagens locais como "6.jpeg".
+const IMAGE_MANIFEST_URL = "https://script.google.com/macros/s/AKfycbyBamiELp0V2NZA2xdA8lMRbpY3MD3TQBIQjCSLbjJe5UIFYn-_GNKX5Y6-8-zmPoWX/exec";
+const WHATSAPP_PHONE = "5511997250908";
 
 const catalog = document.querySelector("#catalog");
 const emptyState = document.querySelector("#emptyState");
@@ -16,6 +19,7 @@ const modalContent = document.querySelector("#modalContent");
 const closeModal = document.querySelector("#closeModal");
 
 let products = [];
+let imageManifest = {};
 
 function parseCSV(text) {
   const rows = [];
@@ -98,9 +102,32 @@ function escapeHTML(value) {
 }
 
 function whatsappLink(product) {
-  const phone = product.whatsapp || "5511997250908";
-  const message = `Olá! Tenho interesse no item "${product.nome}" por ${money(product.preco)}. Ainda está disponível?`;
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  const message = `Olá! Tenho interesse no produto ID ${product.id} — "${product.nome}" por ${money(product.preco)}. Ainda está disponível?`;
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+function productImage(product) {
+  const id = String(product.id || "").trim();
+  return imageManifest[id] || `${id}.jpeg`;
+}
+
+async function loadImageManifest() {
+  if (!IMAGE_MANIFEST_URL) return;
+
+  try {
+    const response = await fetch(IMAGE_MANIFEST_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error("Não foi possível carregar a lista de fotos.");
+
+    const data = await response.json();
+    imageManifest = data.images || data;
+  } catch (error) {
+    console.warn("As fotos do Google Drive não puderam ser carregadas:", error);
+    imageManifest = {};
+  }
+}
+
+function shouldDisplay(product) {
+  return normalize(product.exibir) === "sim";
 }
 
 function fillCategories() {
@@ -138,7 +165,7 @@ function getFilteredProducts() {
     const matchesCategory = category === "Todas" || product.categoria === category;
     const matchesStatus = status === "Todos" || product.status === status;
     const matchesAvailability = availability === "Todas" || product.retirada === availability;
-    const isVisible = product.status !== "Vendido";
+    const isVisible = shouldDisplay(product);
     return isVisible && matchesQuery && matchesCategory && matchesStatus && matchesAvailability;
   });
 
@@ -156,7 +183,7 @@ function render() {
   catalog.innerHTML = "";
   emptyState.hidden = filtered.length > 0;
 
-  const available = products.filter(p => p.status === "Disponível").length;
+  const available = products.filter(p => shouldDisplay(p) && normalize(p.status) === "disponivel").length;
   totalDisponiveis.textContent = available;
 
   filtered.forEach(product => {
@@ -164,7 +191,7 @@ function render() {
     const article = document.createElement("article");
     article.className = "product-card";
     article.innerHTML = `
-      <img src="${escapeHTML(product.foto1)}" alt="Foto de ${escapeHTML(product.nome)}" loading="lazy">
+      <img src="${escapeHTML(productImage(product))}" alt="Foto de ${escapeHTML(product.nome)}" loading="lazy">
       <div class="content">
         <span class="badge ${statusClass(product.status)}">${escapeHTML(product.status || "Disponível")}</span>
         <h2>${escapeHTML(product.nome)}</h2>
@@ -187,7 +214,7 @@ function openProduct(product) {
   const isSold = product.status === "Vendido";
   modalContent.innerHTML = `
     <div class="modal-body">
-      <img src="${escapeHTML(product.foto1)}" alt="Foto de ${escapeHTML(product.nome)}">
+      <img src="${escapeHTML(productImage(product))}" alt="Foto de ${escapeHTML(product.nome)}">
       <div class="modal-info">
         <span class="badge ${statusClass(product.status)}">${escapeHTML(product.status || "Disponível")}</span>
         <h2>${escapeHTML(product.nome)}</h2>
@@ -207,10 +234,13 @@ function openProduct(product) {
 
 async function loadProducts() {
   try {
-    const response = await fetch(SHEET_CSV_URL);
+    const [response] = await Promise.all([
+      fetch(SHEET_CSV_URL, { cache: "no-store" }),
+      loadImageManifest()
+    ]);
     if (!response.ok) throw new Error("Não foi possível carregar a planilha.");
     const text = await response.text();
-    products = parseCSV(text);
+    products = parseCSV(text).filter(shouldDisplay);
     fillCategories();
     render();
   } catch (error) {
