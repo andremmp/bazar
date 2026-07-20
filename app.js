@@ -3,7 +3,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQtT5ShOC
 
 // Depois de publicar o Google Apps Script, cole aqui a URL terminada em /exec.
 // Enquanto estiver vazio, o site tentará usar imagens locais como "6.jpeg".
-const IMAGE_MANIFEST_URL = "";
+const IMAGE_MANIFEST_URL = "https://script.google.com/macros/s/AKfycbyBamiELp0V2NZA2xdA8lMRbpY3MD3TQBIQjCSLbjJe5UIFYn-_GNKX5Y6-8-zmPoWX/exec";
 const WHATSAPP_PHONE = "5511997250908";
 
 const catalog = document.querySelector("#catalog");
