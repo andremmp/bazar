@@ -3,7 +3,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQtT5ShOC
 
 // Depois de publicar o Google Apps Script, cole aqui a URL terminada em /exec.
 // Enquanto estiver vazio, o site tentará usar imagens locais como "6.jpeg".
-const IMAGE_MANIFEST_URL = "https://script.google.com/macros/s/AKfycbyBamiELp0V2NZA2xdA8lMRbpY3MD3TQBIQjCSLbjJe5UIFYn-_GNKX5Y6-8-zmPoWX/exec";
+const IMAGE_MANIFEST_URL = "";
 const WHATSAPP_PHONE = "5511997250908";
 
 const catalog = document.querySelector("#catalog");
@@ -83,10 +83,6 @@ function isImmediate(product) {
   return normalize(product.retirada).includes("imediata");
 }
 
-function isSeptember(product) {
-  return normalize(product.retirada).includes("setembro") || normalize(product.retirada).includes("09/2026");
-}
-
 function isOctober(product) {
   return normalize(product.retirada).includes("outubro") || normalize(product.retirada).includes("10/2026");
 }
@@ -143,8 +139,7 @@ function fillCategories() {
 function matchesAvailability(product, availability) {
   if (availability === "Todas") return true;
   if (availability === "Imediata") return isImmediate(product);
-  if (availability === "Setembro/2026") return isSeptember(product);
-  if (availability === "Outubro/2026") return isOctober(product);
+  if (availability === "Outubro") return isOctober(product);
   return true;
 }
 
@@ -164,9 +159,9 @@ function getFilteredProducts() {
     const matchesQuery = !query || text.includes(query);
     const matchesCategory = category === "Todas" || product.categoria === category;
     const matchesStatus = status === "Todos" || product.status === status;
-    const matchesAvailability = availability === "Todas" || product.retirada === availability;
+    const matchesAvailabilityFilter = matchesAvailability(product, availability);
     const isVisible = shouldDisplay(product);
-    return isVisible && matchesQuery && matchesCategory && matchesStatus && matchesAvailability;
+    return isVisible && matchesQuery && matchesCategory && matchesStatus && matchesAvailabilityFilter;
   });
 
   filtered.sort((a, b) => {
