@@ -201,22 +201,32 @@ function render() {
       </div>
     `;
     const productImageElement = article.querySelector(".product-image");
-    const openCurrentProduct = () => openProduct(product);
 
-    productImageElement.addEventListener("click", openCurrentProduct);
+    productImageElement.addEventListener("click", () => openImage(product));
     productImageElement.addEventListener("keydown", event => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        openCurrentProduct();
+        openImage(product);
       }
     });
 
-    article.querySelector(".details").addEventListener("click", openCurrentProduct);
+    article.querySelector(".details").addEventListener("click", () => openProduct(product));
     catalog.appendChild(article);
   });
 }
 
+function openImage(product) {
+  modal.classList.add("image-viewer");
+  modalContent.innerHTML = `
+    <div class="image-only-wrap">
+      <img src="${escapeHTML(productImage(product))}" alt="Foto ampliada de ${escapeHTML(product.nome)}">
+    </div>
+  `;
+  modal.showModal();
+}
+
 function openProduct(product) {
+  modal.classList.remove("image-viewer");
   const isSold = product.status === "Vendido";
   modalContent.innerHTML = `
     <div class="modal-body">
@@ -258,9 +268,14 @@ async function loadProducts() {
   input.addEventListener("input", render);
 });
 
-closeModal.addEventListener("click", () => modal.close());
+function closeProductModal() {
+  modal.close();
+  modal.classList.remove("image-viewer");
+}
+
+closeModal.addEventListener("click", closeProductModal);
 modal.addEventListener("click", event => {
-  if (event.target === modal) modal.close();
+  if (event.target === modal) closeProductModal();
 });
 
 loadProducts();

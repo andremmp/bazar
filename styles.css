@@ -390,9 +390,9 @@ select:focus {
 }
 
 .modal {
-  width: min(900px, 94vw);
-  max-width: 94vw;
-  max-height: 94vh;
+  width: min(820px, 92vw);
+  max-width: 92vw;
+  max-height: 92vh;
   overflow-y: auto;
   overflow-x: hidden;
   border: 0;
@@ -422,14 +422,46 @@ select:focus {
 .modal-body img {
   display: block;
   width: 100%;
-  height: min(62vh, 620px);
-  object-fit: contain;
+  max-height: 440px;
+  object-fit: cover;
   object-position: center;
   background: #fff0ec;
   border-radius: 28px 28px 0 0;
 }
+
 .product-card .product-image {
   cursor: zoom-in;
+}
+
+.modal.image-viewer {
+  width: auto;
+  max-width: min(760px, 88vw);
+  max-height: 86vh;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+
+.modal.image-viewer .close {
+  right: 8px;
+  top: 8px;
+}
+
+.image-only-wrap {
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.image-only-wrap img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(760px, 88vw);
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 18px;
+  background: white;
 }
 .modal-info {
   padding: 24px;
@@ -473,4 +505,16 @@ select:focus {
   .filters { grid-template-columns: 1fr; }
   .info-card.wide { grid-column: auto; }
   h1 { font-size: clamp(2.35rem, 13vw, 4rem); }
+}
+
+@media (max-width: 700px) {
+  .modal.image-viewer {
+    max-width: 90vw;
+  }
+
+  .image-only-wrap img {
+    max-width: 90vw;
+    max-height: 72vh;
+    border-radius: 14px;
+  }
 }
