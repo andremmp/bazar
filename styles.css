@@ -390,7 +390,10 @@ select:focus {
 }
 
 .modal {
-  width: min(820px, 92vw);
+  width: max-content;
+  max-width: 96vw;
+  max-height: 94vh;
+  overflow: auto;
   border: 0;
   border-radius: 28px;
   padding: 0;
@@ -412,11 +415,21 @@ select:focus {
   border: 1px solid var(--line);
   z-index: 2;
 }
+.modal-body {
+  width: max-content;
+  min-width: min(820px, 92vw);
+}
 .modal-body img {
-  width: 100%;
-  max-height: 440px;
-  object-fit: cover;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: unset;
   border-radius: 28px 28px 0 0;
+}
+.product-card .product-image {
+  cursor: zoom-in;
 }
 .modal-info {
   padding: 24px;

@@ -186,7 +186,7 @@ function render() {
     const article = document.createElement("article");
     article.className = "product-card";
     article.innerHTML = `
-      <img src="${escapeHTML(productImage(product))}" alt="Foto de ${escapeHTML(product.nome)}" loading="lazy">
+      <img class="product-image" src="${escapeHTML(productImage(product))}" alt="Foto de ${escapeHTML(product.nome)}" loading="lazy" role="button" tabindex="0" aria-label="Abrir imagem de ${escapeHTML(product.nome)} em tamanho original">
       <div class="content">
         <span class="badge ${statusClass(product.status)}">${escapeHTML(product.status || "Disponível")}</span>
         <h2>${escapeHTML(product.nome)}</h2>
@@ -200,7 +200,18 @@ function render() {
         </div>
       </div>
     `;
-    article.querySelector(".details").addEventListener("click", () => openProduct(product));
+    const productImageElement = article.querySelector(".product-image");
+    const openCurrentProduct = () => openProduct(product);
+
+    productImageElement.addEventListener("click", openCurrentProduct);
+    productImageElement.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openCurrentProduct();
+      }
+    });
+
+    article.querySelector(".details").addEventListener("click", openCurrentProduct);
     catalog.appendChild(article);
   });
 }
